@@ -27,10 +27,8 @@ export class LineGenerator extends Phaser.GameObjects.Container {
 
 
     showLines(lines: number[]) {
-
         lines.forEach(lineIndex => {
             if (lineIndex >= 0 && lineIndex < this.lineArr.length) {
-                console.log(this.lineArr[lineIndex], "this.lineArr[lineIndex]");
                 this.lineArr[lineIndex].showLine();
             }
         });
@@ -56,18 +54,14 @@ export class Lines extends Phaser.GameObjects.Container {
             const startY = yOffset * points[i] - yLineOffset;
             const endX = (i + 1) * xOffset;
             const endY = yOffset * points[i + 1] - yLineOffset;
-
             const distance = Phaser.Math.Distance.Between(startX, startY, endX, endY);
             const angle = Phaser.Math.Angle.Between(startX, startY, endX, endY);
-             
             const lineSprite = this.createLineSprite(scene, startX, startY, distance, angle);
             this.lineSprites.push(lineSprite);
             this.add(lineSprite);
         }
-
         // Initialize all line sprites to be invisible
         this.hideLine();
-
         // Add this Container to the scene
         scene.add.existing(this);
     }
@@ -91,7 +85,6 @@ export class Lines extends Phaser.GameObjects.Container {
     }
 
     showLine() {
-
         this.lineSprites.forEach(sprite => sprite.setVisible(true));
     }
 

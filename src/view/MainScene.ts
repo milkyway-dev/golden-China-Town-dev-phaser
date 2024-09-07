@@ -11,6 +11,7 @@ import SoundManager from '../scripts/SoundManager';
 
 export default class MainScene extends Scene {
     slot!: Slots;
+    Background!: Phaser.GameObjects.Sprite
     slotFrame!: Phaser.GameObjects.Sprite;
     stairs!: Phaser.GameObjects.Sprite;
     reelBg!: Phaser.GameObjects.Sprite
@@ -24,8 +25,8 @@ export default class MainScene extends Scene {
     uiPopups!: UiPopups;
     lineSymbols!: LineSymbols
     onSpinSound!: Phaser.Sound.BaseSound
+    logo!: Phaser.GameObjects.Sprite
     private mainContainer!: Phaser.GameObjects.Container;
-
     constructor() {
         super({ key: 'MainScene' });
     }
@@ -36,15 +37,18 @@ export default class MainScene extends Scene {
         // Set up the background
         const { width, height } = this.cameras.main;
         // Initialize main container
+        const bbgOverLay = this.add.rectangle(0, 0, this.cameras.main.width, this.cameras.main.height, 0xffffff, 0.25).setOrigin(0)
         this.mainContainer = this.add.container();
         this.soundManager = new SoundManager(this)
-
+       
+        this.Background = new Phaser.GameObjects.Sprite(this, width/2, height/2, "Background")
         // Set up the stairs frame
-        this.stairs = new Phaser.GameObjects.Sprite(this, width/2, height/1.02, 'stairs').setDepth(0)
+        this.stairs = new Phaser.GameObjects.Sprite(this, width/2, height/1.02, 'stairs')
         // this.reelBg = new Phaser.GameObjects.Sprite(this, width/2, height/2.2, 'reelBg').setDepth(0)
-        this.roofTop = new Phaser.GameObjects.Sprite(this, width/2, height * 0.08, 'roof').setDepth(2)
-        this.columnleft = new Phaser.GameObjects.Sprite(this, width/4.3, height/2.2, 'column').setDepth(1)
-        this.columnRight = new Phaser.GameObjects.Sprite(this, width/1.31, height/2.2, 'column').setDepth(1)
+        this.roofTop = new Phaser.GameObjects.Sprite(this, width/2, height * 0.08, 'roof')
+        this.columnleft = new Phaser.GameObjects.Sprite(this, width/4.3, height/2.2, 'column')
+        this.columnRight = new Phaser.GameObjects.Sprite(this, width/1.31, height/2.2, 'column')
+        this.logo = new Phaser.GameObjects.Sprite(this, width/2, height/2 - 400, "GoldenChinaTown")
 
         // Repeat reelBg 4 times
         const reelBgCount = 5;
@@ -52,7 +56,7 @@ export default class MainScene extends Scene {
         for (let i = 0; i < reelBgCount; i++) {
             const reelBgX = width / 3 + i * reelBgSpacing; // or any specific x-coordinate
             const reelBgY = height / 2;
-            const reelBg = new Phaser.GameObjects.Sprite(this, reelBgX, reelBgY, 'reelBg').setDepth(0);
+            const reelBg = new Phaser.GameObjects.Sprite(this, reelBgX, reelBgY, 'reelBg').setDepth(2);
             this.mainContainer.add(reelBg);
         }
         const leftPlank = new Phaser.GameObjects.Sprite(this, this.columnleft.x + 114,height/1.9, "leftPlank").setScale(0.9)
@@ -65,7 +69,7 @@ export default class MainScene extends Scene {
 
         // this.snow = new Phaser.GameObjects.Sprite(this, width/2, height/2.4, 'snow')
         
-        this.mainContainer.add([  this.stairs, up, this.columnleft, this.columnRight, leftPlank, rightPlank, bottomPlank, topPlank, this.roofTop,leftLanterns, rightLanterns,])
+        this.mainContainer.add([this.stairs, up, this.columnleft, this.columnRight, leftPlank, rightPlank, bottomPlank, topPlank, this.roofTop,leftLanterns, rightLanterns, this.logo])
         this.soundManager.playSound("backgroundMusic")
 
         // Initialize UI Container
@@ -85,8 +89,6 @@ export default class MainScene extends Scene {
         // Initialize LineSymbols
         this.lineSymbols = new LineSymbols(this, 10, 12, this.lineGenerator)
         this.mainContainer.add(this.lineSymbols)
-        console.log(initData, "mainScene initData");
-        
     }
 
     update(time: number, delta: number) {
@@ -128,7 +130,7 @@ export default class MainScene extends Scene {
                         Globals.SceneHandler?.addScene('BonusScene', BonusScene, true)
                     }, 2000);
                 }         
-                this.uiContainer.currentWiningText.updateLabelText(ResultData.playerData.currentWining.toString());
+                this.uiContainer.currentWiningText.updateLabelText(ResultData.playerData.currentWining.toFixed(2));
                 currentGameData.currentBalance = ResultData.playerData.Balance;
                 let betValue = (initData.gameData.Bets[currentGameData.currentBetIndex]) * 20
                 let jackpot = ResultData.gameData.jackpot
@@ -137,7 +139,7 @@ export default class MainScene extends Scene {
                 const freeSpinCount = ResultData.gameData.freeSpins.count;
                 // const freeSpinCount = 5;
                 // Check if freeSpinCount is greater than 1
-                if (freeSpinCount >= 1) {
+                if (freeSpinCount >=1) {
                     this.freeSpinPopup(freeSpinCount, 'freeSpinPopup')
                     this.uiContainer.freeSpininit(freeSpinCount)
                     this.tweens.add({
@@ -167,7 +169,6 @@ export default class MainScene extends Scene {
                    this.showWinPopup(winAmount, 'jackpotPopup')
                 }
                 this.slot.stopTween();
-                
             });
         }
     }
@@ -180,7 +181,7 @@ export default class MainScene extends Scene {
      */
     showWinPopup(winAmount: number, spriteKey: string) {
         // Create the popup background
-        const inputOverlay = this.add.rectangle(0, 0, this.cameras.main.width, this.cameras.main.height, 0x000000, 0.5)
+        const inputOverlay = this.add.rectangle(0, 0, this.cameras.main.width, this.cameras.main.height, 0x2a1820, 0.95)
         .setOrigin(0, 0)
         .setDepth(9) // Set depth to be below the popup but above game elements
         .setInteractive() // Make it interactive to block all input events
@@ -188,15 +189,17 @@ export default class MainScene extends Scene {
             // Prevent default action on pointerdown to block interaction
             pointer.event.stopPropagation();
         });
-
-
-        // Create the sprite based on the key provided
-        const winSprite = this.add.sprite(this.cameras.main.centerX, this.cameras.main.centerY - 50, spriteKey).setDepth(11);
-
+        let winSprite: any
+        if(spriteKey === "jackpotPopup"){
+            winSprite = this.add.sprite(this.cameras.main.centerX - 125, this.cameras.main.centerY - 250, spriteKey).setDepth(11);
+        }else{
+            winSprite = this.add.sprite(this.cameras.main.centerX, this.cameras.main.centerY - 50, spriteKey).setDepth(11);
+        }
+      
         // Create the text object to display win amount
         const winText = this.add.text(this.cameras.main.centerX, this.cameras.main.centerY, '0', {
             font: '45px',
-            color: '#FFFFFF'
+            color: '#000000'
         }).setDepth(11).setOrigin(0.5);
 
         // Tween to animate the text increment from 0 to winAmount
@@ -229,7 +232,7 @@ export default class MainScene extends Scene {
         console.log(this.uiContainer.isAutoSpinning, "AutoSpinCheck");
         
         // Create the popup background
-        const inputOverlay = this.add.rectangle(0, 0, this.cameras.main.width, this.cameras.main.height, 0x000000, 0.5)
+        const inputOverlay = this.add.rectangle(0, 0, this.cameras.main.width, this.cameras.main.height, 0x2a1820, 0.95)
         .setOrigin(0, 0)
         .setDepth(9) // Set depth to be below the popup but above game elements
         .setInteractive() // Make it interactive to block all input events
@@ -240,13 +243,11 @@ export default class MainScene extends Scene {
         // Create the sprite based on the key provided
         const winSprite = this.add.sprite(this.cameras.main.centerX, this.cameras.main.centerY, spriteKey).setDepth(11);
         if(!this.uiContainer.isAutoSpinning){
-          
-            
         }
         // Create the text object to display win amount
         const freeText = this.add.text(this.cameras.main.centerX, this.cameras.main.centerY, '0', {
             font: '45px',
-            color: '#FFFFFF'
+            color: '#000000'
         }).setDepth(11).setOrigin(0.5);
         // Tween to animate the text increment from 0 to winAmount
         this.tweens.addCounter({

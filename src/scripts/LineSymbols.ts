@@ -7,6 +7,7 @@ export default class LineSymbols extends Phaser.GameObjects.Container{
     numberArr: Phaser.GameObjects.Text[] = [];
     linesGenerator!: LineGenerator; // Reference to LineGenerator
     numberContainers!: Phaser.GameObjects.Container
+    circle!: Phaser.GameObjects.Sprite
     constructor(scene: Phaser.Scene, yOf: number, xOf: number, linesGenerator: LineGenerator) {
         // console.log(xOf, yOf);
         super(scene);
@@ -15,7 +16,7 @@ export default class LineSymbols extends Phaser.GameObjects.Container{
         for (let i = 0; i < initData.gameData.Lines.length; i++) {
             let numberText = this.createNumber(scene, i);
             this.numberArr.push(numberText);
-            this.add(numberText);
+            this.add([numberText]);
         }
 
         this.setPosition(gameConfig.scale.width / 2, gameConfig.scale.height/2.9);
@@ -36,13 +37,13 @@ export default class LineSymbols extends Phaser.GameObjects.Container{
             xPosition = - gameConfig.scale.width/3.75;
             yPosition = (index / 2) * 60 - 150;  // Staggered downwards for each even number
             numberContainer.add(numberBg.setPosition(gameConfig.scale.width/4.3, yPosition + 380));
+
         } else {
             // Odd numbers (1, 3, 5, 7, 9, etc.) go on the opposite side
             xPosition = gameConfig.scale.width/3.79;
             yPosition =  ((index - 1) / 2) * 60 - 150;  // Staggered downwards for each odd number
             numberContainer.add(numberBg.setPosition(gameConfig.scale.width / 1.31, yPosition + 380))
         }
-
         // Create a text object for each number
         let numberText = scene.add.text(xPosition, yPosition, (index + 1).toString(), {
             font: "24px",

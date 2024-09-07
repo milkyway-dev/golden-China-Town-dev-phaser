@@ -30,13 +30,9 @@ export default class BonusScene extends Scene{
         this.bonusContainer = this.add.container();
         this.SceneBg = new Phaser.GameObjects.Sprite(this, width/2, height/2, 'Background').setDisplaySize(width, height)
         this.Stair = new Phaser.GameObjects.Sprite(this, width/2, height/1.08, 'stairs').setDepth(0)
-        this.columnLeft = new Phaser.GameObjects.Sprite(this, width/4.3, height/2.2, 'column').setDepth(1)
-        this.columnRight = new Phaser.GameObjects.Sprite(this, width/1.31, height/2.2, 'column').setDepth(1)
-        this.roofTop = new Phaser.GameObjects.Sprite(this, width/2, height * 0.11, 'roof').setDepth(2)
-        this.snow = new Phaser.GameObjects.Sprite(this, width/2, height/2.4, 'snow').setScale(0.9, 1)
-        this.spinWheelBg = new Phaser.GameObjects.Sprite(this, width/2, height/2, 'wheelBg').setScale(0.9)
+        this.spinWheelBg = new Phaser.GameObjects.Sprite(this, width/2, height/2 - 40, 'wheelBg').setScale(0.6)
         // Create the spin circle sprite
-        this.spinCircle = new Phaser.GameObjects.Sprite(this, 0, 0, 'spinCircle');
+        this.spinCircle = new Phaser.GameObjects.Sprite(this, 0, 0, 'spinCircle').setScale(0.7);
          
         // Create a container for the spin circle and numbers
         this.spinContainer = this.add.container(width / 2, height / 2.2, [this.spinCircle]);
@@ -46,10 +42,9 @@ export default class BonusScene extends Scene{
         maskShape.fillCircle(0, 0, this.spinCircle.width / 2);
         const mask = maskShape.createGeometryMask();
         this.spinContainer.setMask(mask);
-     
-        this.spinCenter = new Phaser.GameObjects.Sprite(this, width/2, height/2.2, 'spinCenter').setScale(0.7);
+        this.spinCenter = new Phaser.GameObjects.Sprite(this, width/2, 350, 'spinCenter').setScale(0.5);
         this.startButton = new Phaser.GameObjects.Sprite (this, width/2, height/1.15, 'freeSpinStartButton').setScale(0.7).setInteractive()
-        this.bonusContainer.add([ this.SceneBg, this.roofTop, this.snow, this.Stair,  this.startButton, this.columnLeft, this.columnRight, this.spinWheelBg, this.spinCircle, this.spinCenter]);
+        this.bonusContainer.add([ this.SceneBg, this.Stair, this.spinWheelBg, this.spinCircle, this.spinCenter, this.startButton,]);
         this.spinContainer = this.add.container(width / 2, height / 2.2, [this.spinCircle]);
      
        

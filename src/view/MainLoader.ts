@@ -40,13 +40,13 @@ export default class MainLoader extends Scene {
     private addBackgroundImage() {
         const { width, height } = this.scale;
         // this.add.image(width / 2, height / 2, 'Background').setOrigin(0.5).setDisplaySize(width, height);
-        this.logoImage = this.add.sprite(width/2, 300, 'logo').setScale(0.6, 0.6)
+        this.logoImage = this.add.sprite(width/2, 300, 'logo').setScale(0.8, 0.8)
  
         // Initialize progress bar graphics
-        this.progressBox = this.add.sprite(width / 2, height / 2 + 100, "loaderBg").setOrigin(0.5, 0.5);
+        this.progressBox = this.add.sprite(width / 2, height / 2 + 400, "loaderBg")
 
         // Initialize progress bar using assetsLoader.png image
-        this.progressBar = this.add.sprite(width / 2 + 5, height / 2 + 98, "assetsloader").setOrigin(0.5, 0.5);
+        this.progressBar = this.add.sprite(width / 2 + 5, height / 2 + 398, "assetsloader")
         this.progressBar.setCrop(0, 0, 0, this.progressBar.height); // Start with 0 width
     }
 

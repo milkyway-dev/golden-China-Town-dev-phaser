@@ -68,7 +68,7 @@ export class Slots extends Phaser.GameObjects.Container {
                 slot.symbol.setScale(0.8, 0.8)
                 slot.startX = slot.symbol.x;
                 slot.startY = slot.symbol.y;
-                this.slotSymbols[i].push(slot);
+                this.slotSymbols[i].push(slot);                
                 reelContainer.add(slot.symbol)
             }
             this.add(reelContainer); 
@@ -94,7 +94,7 @@ export class Slots extends Phaser.GameObjects.Container {
     }
 
     getRandomSymbolKey(): string {
-        const randomIndex = Phaser.Math.Between(0, this.symbolKeys.length - 1);
+        const randomIndex = Phaser.Math.Between(0, this.symbolKeys.length - 1);        
         return this.symbolKeys[randomIndex];
     }
 

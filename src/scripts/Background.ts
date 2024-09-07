@@ -8,13 +8,13 @@ private backgroundMusic: Phaser.Sound.BaseSound | null = null; // Add a variable
     super(config)
  }
  preload(){
-    this.load.image("Background", "src/sprites/Background.jpg");
+    this.load.image("BackgroundNew", "src/sprites/NewBackground.png");
    //  this.load.audio("backgroundMusic", "src/sounds/Teaser.wav")
     
  }
  create(){
     const { width, height } = this.scale;
-    this.add.image(width / 2, height / 2, 'Background').setOrigin(0.5).setDisplaySize(width, height);
+    this.add.image(width / 2, height / 2, 'BackgroundNew').setOrigin(0.5).setDisplaySize(width, height);
    //  this.backgroundMusic = this.sound.add("backgroundMusic", { loop: true, volume: 0.1 });
    //  this.backgroundMusic.play();
  }
