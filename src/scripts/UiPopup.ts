@@ -278,8 +278,9 @@ export class UiPopups extends Phaser.GameObjects.Container {
                     console.log("initData", initData.UIData.symbols);
                     
                     // 7. Add the content that will be scrolled 
-                    const contentHeight = 3500; // Example content height, adjust as needed 
-                    const content = this.scene.add.image( gameConfig.scale.width / 2, 100, 'minorSymbolsHeading' ).setOrigin(0.5).setDepth(2); 
+                    const contentHeight = 3100; // Example content height, adjust as needed 
+                    // const content = this.scene.add.image( gameConfig.scale.width / 2, 100, 'minorSymbolsHeading' ).setOrigin(0.5).setDepth(2); 
+                    const content = this.scene.add.text(gameConfig.scale.width / 2, 100, "Minor Symbol",  { fontSize: '70px', color: '#920000', align: "Center",  stroke: "#920000", strokeThickness: 3, } ).setOrigin(0.5)
                     const minSymbol1 = this.scene.add.image(350, 350, "slots0_0").setDepth(2).setScale(0.8) 
                     const minSymbol2 = this.scene.add.image(850, 350, "slots1_0").setDepth(2).setScale(0.8) 
                     const minSymbol3 = this.scene.add.image(1350, 350, "slots2_0").setDepth(2).setScale(0.8) 
@@ -288,11 +289,11 @@ export class UiPopups extends Phaser.GameObjects.Container {
 
 
                     const infoIcons = [
-                        { x: 500, y: 300 }, // Position for infoIcon2
-                        { x: 1000, y: 300 }, // Position for infoIcon3
-                        { x: 1500, y: 300 }, //
-                        { x: 800, y: 500 }, //
-                        { x: 1200, y: 500 }, //
+                        { x: 470, y: 300 }, // Position for infoIcon2
+                        { x: 940, y: 300 }, // Position for infoIcon3
+                        { x: 1450, y: 300 }, //
+                        { x: 770, y: 500 }, //
+                        { x: 1170, y: 500 }, //
                     ]
                     const minorIcon = initData.UIData.symbols
                     minorIcon.forEach((symbol, symbolIndex) => {
@@ -323,24 +324,28 @@ export class UiPopups extends Phaser.GameObjects.Container {
                                 }
                             }
                         });
-                    });                    
+                    });
+                    
+                    //Major Symbol
+                    const MajorSymBolHeading = this.scene.add.text(gameConfig.scale.width / 2, 800, "Major Symbol",  { fontSize: '70px', color: '#920000', align: "Center",  stroke: "#920000", strokeThickness: 3, } ).setOrigin(0.5)
                     const majorSymbol1 = this.scene.add.image(350, 1100, "slots5_0").setDepth(2).setScale(0.8) 
                     const majorSymbol2 = this.scene.add.image(850, 1100, "slots6_0").setDepth(2).setScale(0.8) 
                     const majorSymbol3 = this.scene.add.image(1350, 1100, "slots7_0").setDepth(2).setScale(0.8) 
                     const majorSymbol4 = this.scene.add.image(650, 1300, "slots8_0").setDepth(2).setScale(0.8) 
                     const majorSymbol5 = this.scene.add.image(1050, 1300, "slots9_0").setDepth(2).setScale(0.8) 
-                    const majorSymbol1Text = this.scene.add.text(500, 1050, '5X - 200 \n4X - 100 \n3X - 60', { fontSize: '30px', color: '#920000', align: "left" } ) 
-                    const majorSymbol2Text = this.scene.add.text(1000, 1050, '5X - 200 \n4X - 100 \n3X - 60', { fontSize: '30px', color: '#920000', align: "left" } ) 
-                    const majorSymbol3Text = this.scene.add.text(1500, 1050, '5X - 200 \n4X - 100 \n3X - 60', { fontSize: '30px', color: '#920000', align: "left" } ) 
-                    const majorSymbol4Text = this.scene.add.text(800, 1250, '5X - 200 \n4X - 100 \n3X - 60', { fontSize: '30px', color: '#920000', align: "left" } )
-                    const majorSymbol5Text = this.scene.add.text(1200, 1250, '5X - 200 \n4X - 100 \n3X - 60', { fontSize: '30px', color: '#920000', align: "left" } )
+                    const majorSymbol1Text = this.scene.add.text(470, 1050, '5X - 200 \n4X - 100 \n3X - 60', { fontSize: '30px', color: '#920000', align: "left" } ) 
+                    const majorSymbol2Text = this.scene.add.text(950, 1050, '5X - 200 \n4X - 100 \n3X - 60', { fontSize: '30px', color: '#920000', align: "left" } ) 
+                    const majorSymbol3Text = this.scene.add.text(1450, 1050, '5X - 200 \n4X - 100 \n3X - 60', { fontSize: '30px', color: '#920000', align: "left" } ) 
+                    const majorSymbol4Text = this.scene.add.text(770, 1250, '5X - 200 \n4X - 100 \n3X - 60', { fontSize: '30px', color: '#920000', align: "left" } )
+                    const majorSymbol5Text = this.scene.add.text(1170, 1250, '5X - 200 \n4X - 100 \n3X - 60', { fontSize: '30px', color: '#920000', align: "left" } )
                     const specialSymBol1 = this.scene.add.image(200, 1750, "slots10_0").setDepth(2).setOrigin(0.5).setScale(0.8)
                     const specialSymBol2 = this.scene.add.image(200, 1950, "slots11_0").setDepth(2).setOrigin(0.5).setScale(0.8)
                     const specialSymBol3 = this.scene.add.image(200, 2150, "slots12_0").setDepth(2).setOrigin(0.5).setScale(0.8)
                     const specialSymBol4 = this.scene.add.image(200, 2350, "slots13_0").setDepth(2).setOrigin(0.5).setScale(0.8)
                     const specialSymBol5 = this.scene.add.image(200, 2550, "slots14_0").setDepth(2).setOrigin(0.5).setScale(0.8)
 
-
+                    //Special Symbol
+                    const specialSymBolHeading = this.scene.add.text(gameConfig.scale.width / 2, 1550, "Special Symbol",  { fontSize: '70px', color: '#920000', align: "Center",  stroke: "#920000", strokeThickness: 3, } ).setOrigin(0.5)
                     const descriptionPos = [ 
                         {x: 350, y: 1700},
                         {x: 350, y: 1900},
@@ -348,7 +353,6 @@ export class UiPopups extends Phaser.GameObjects.Container {
                         {x: 350, y: 2300},
                         {x: 350, y: 2500},
                     ]
-
                     for (let i = 10; i <= 14; i++) {
                         const symbol = initData.UIData.symbols[i];
                         if (symbol) {
@@ -367,12 +371,15 @@ export class UiPopups extends Phaser.GameObjects.Container {
                         } else {
                         }
                     }
-                    const MajorSymBolHeading = this.scene.add.image( gameConfig.scale.width / 2, 800, 'majorSymbolHeading' ).setOrigin(0.5).setDepth(2);
-                    const specialSymBolHeading = this.scene.add.image(gameConfig.scale.width / 2, 1550, "specialSymBolHeading").setDepth(2).setOrigin(0.5)
+
+                    const payLineHeading = this.scene.add.text(gameConfig.scale.width / 2, 2700, "PayLines",  { fontSize: '70px', color: '#920000', align: "Center",  stroke: "#920000", strokeThickness: 3, } ).setOrigin(0.5)
+                    const payLines = this.scene.add.image( gameConfig.scale.width / 2, 3000, 'payLines' ).setScale(0.9); 
+                    // const MajorSymBolHeading = this.scene.add.image( gameConfig.scale.width / 2, 800, 'majorSymbolHeading' ).setOrigin(0.5).setDepth(2);
+                    
                     scrollContainer.add([content,minSymbol1, minSymbol2, 
                         minSymbol3, minSymbol4, minSymbol5, 
                         MajorSymBolHeading, majorSymbol1, majorSymbol1Text, majorSymbol2, majorSymbol2Text, 
-                        majorSymbol3, majorSymbol3Text, majorSymbol4, majorSymbol5, majorSymbol4Text, majorSymbol5Text, specialSymBolHeading, specialSymBol1, specialSymBol2, specialSymBol3, specialSymBol4, specialSymBol5
+                        majorSymbol3, majorSymbol3Text, majorSymbol4, majorSymbol5, majorSymbol4Text, majorSymbol5Text, specialSymBolHeading, specialSymBol1, specialSymBol2, specialSymBol3, specialSymBol4, specialSymBol5, payLineHeading, payLines
                     ]); 
                     // 8. Scrollbar background 
                     const scrollbarBg = this.scene.add.sprite( gameConfig.scale.width - 40, // Positioned on the right side 
@@ -402,6 +409,49 @@ export class UiPopups extends Phaser.GameObjects.Container {
                         // Update scroll container's Y position based on scroll percentage
                         scrollContainer.y = Phaser.Math.Interpolation.Linear([contentMaxY, contentMinY], scrollPercent);
                     });
+
+                    this.scene.input.on('wheel', (pointer: any, gameObjects: any, deltaX: number, deltaY: number) => {
+                        const minY = scrollbarBg.getTopCenter().y + roller.height / 2;
+                        const maxY = scrollbarBg.getBottomCenter().y - roller.height / 2;
+                
+                        // Adjust roller Y position based on mouse wheel movement
+                        let newY = roller.y + deltaY * 0.1; // Adjust speed of scroll
+                        newY = Phaser.Math.Clamp(newY, minY, maxY);
+                        roller.y = newY;
+                        // Calculate the scroll percentage (0 to 1)
+                        const scrollPercent = (newY - minY) / (maxY - minY);
+                        // Map the scroll percentage to the content's Y position range
+                        const contentMaxY = 300; // The top position of content (relative to mask)
+                        const contentMinY = -(contentHeight - 600); // The bottom position of content relative to mask
+                        // Update scroll container's Y position based on scroll percentage
+                        scrollContainer.y = Phaser.Math.Interpolation.Linear([contentMaxY, contentMinY], scrollPercent);
+                    });
+        }
+
+        parseText(text: string): { text: string, color: string }[] {
+            const regex = /<color=(.*?)>(.*?)<\/color>/g;
+            let result;
+            let parts = [];
+            let lastIndex = 0;
+        
+            while ((result = regex.exec(text)) !== null) {
+                // Add the text before the color tag (default color if not colored text)
+                if (lastIndex < result.index) {
+                    parts.push({ text: text.substring(lastIndex, result.index), color: '#920000' }); // Default color
+                }
+        
+                // Add the colored text
+                parts.push({ text: result[2], color: result[1] });
+        
+                lastIndex = regex.lastIndex;
+            }
+        
+            // Add any remaining text after the last color tag
+            if (lastIndex < text.length) {
+                parts.push({ text: text.substring(lastIndex), color: '#920000' }); // Default color
+            }
+        
+            return parts;
         }
 
     buttonMusic(key: string){
@@ -488,7 +538,6 @@ export class UiPopups extends Phaser.GameObjects.Container {
             this.menuBtn.disableInteractive();
             this.settingBtn.disableInteractive()
             this.rulesBtn.disableInteractive();
-            this.menuBtn.disableInteractive();
         }
     }
 }

@@ -16,20 +16,19 @@ export default class SoundManager {
 
     public addSound(key: string, url: string) {
         if (this.scene.sound.get(key)) {
-            console.log('Sound already exists in cache');
             this.sounds[key] = this.scene.sound.get(key);
         } else {
-            console.log('Loading new sounds');
             this.sounds[key] = this.scene.sound.add(key, { volume: 0.5 });
         }
         console.log(this.sounds[key], "test");
         
     }
 
-    public playSound(key: string) {
-        if(this.soundEnabled){
+    public playSound(key: string) { 
+        if(this.soundEnabled){ 
             if (key === 'backgroundMusic') {                
                 Globals.soundResources[key].loop(true);
+                Globals.soundResources[key].volume(0.6)
                 Globals.soundResources[key].play();
             } else {
                 Globals.soundResources[key].loop(false); // Ensure looping is off for non-background sounds
@@ -41,9 +40,13 @@ export default class SoundManager {
     public pauseSound(key: string) {
         Globals.soundResources[key].pause();
     }
-
+ 
     public resumeBgMusic(key: string){
-        Globals.soundResources[key].play()
+        if (key === 'backgroundMusic') {                
+            Globals.soundResources[key].loop(true);
+            Globals.soundResources[key].volume(0.6)
+            Globals.soundResources[key].play();
+        }
     }
 
     public stopSound(key: string) {
@@ -76,11 +79,11 @@ export default class SoundManager {
     private setupFocusBlurEvents() {
         window.addEventListener('blur', () => {
             console.log("onBlur");
-                this.pauseSound('backgroundMusic');
+                this.stopSound('backgroundMusic');
         });
 
         window.addEventListener('focus', () => {
-            this.resumeBgMusic('backgroundMusic');
+            this.playSound('backgroundMusic');
         });
     }
 }

@@ -1,3 +1,5 @@
+import { disconnect } from "process";
+
 // import { Background } from './Background';
 export const LoaderConfig = {
     // frame : "/src/sprites/SlotMachine_3x5.png",
@@ -70,6 +72,7 @@ export const LoaderConfig = {
     onButton: "src/sprites/On.png",
     offButton: "src/sprites/Off.png",
     headingImage: "src/sprites/PayTable_.png",
+    payLines: "src/sprites/payLines.png",
     popupbg: "src/sprites/PopupBg.jpg",
     scrollBg: "src/sprites/ScrollBar.png",
     scroller:"src/sprites/Roller.png",
@@ -80,6 +83,7 @@ export const LoaderConfig = {
     lineButton: "src/sprites/lineButton.png",
     settingText: "src/sprites/SettingButton.png",
     InfoPopupBg: "src/sprites/infoBg.jpg",
+    disconnectClose: "src/sprites/disconnectClose.png",
     
     slots0_0 :  "/src/sprites/Symbols/Ten/Ten1.png",
     slots0_1 :  "/src/sprites/Symbols/Ten/Ten2.png",
@@ -616,7 +620,7 @@ export const fontData = ["Montserrat"];
 
 
 export const LoaderSoundConfig: any = {
-        backgroundMusic: "src/sounds/Teaser.wav",
+        backgroundMusic: "src/sounds/Teaser.mp3",
         onSpin :  "/src/sounds/slot-machine-loop.mp3",
         spinButton: "src/sounds/spin.wav",
         winMusic: "src/sounds/JackpotWinner.mp3",

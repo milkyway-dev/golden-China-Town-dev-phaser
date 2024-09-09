@@ -21,8 +21,6 @@ export default class BonusScene extends Scene{
     public canSpinBonus: boolean = true;
     constructor() {
         super({ key: 'BonusScene' });
-       
-        
     }
     create(){
         console.log(values, "values");
@@ -32,25 +30,35 @@ export default class BonusScene extends Scene{
         this.Stair = new Phaser.GameObjects.Sprite(this, width/2, height/1.08, 'stairs').setDepth(0)
         this.spinWheelBg = new Phaser.GameObjects.Sprite(this, width/2, height/2 - 40, 'wheelBg').setScale(0.6)
         // Create the spin circle sprite
-        this.spinCircle = new Phaser.GameObjects.Sprite(this, 0, 0, 'spinCircle').setScale(0.7);
+        this.spinCircle = new Phaser.GameObjects.Sprite(this, 0, 0, 'spinCircle').setScale(0.7).setDepth(0);
          
         // Create a container for the spin circle and numbers
         this.spinContainer = this.add.container(width / 2, height / 2.2, [this.spinCircle]);
      
         // Set a circular mask for the container to match the spinCircle size
         const maskShape = this.make.graphics({ x: 0, y: 0 });
-        maskShape.fillCircle(0, 0, this.spinCircle.width / 2);
+        maskShape.fillCircle(0, 0, 4000);
         const mask = maskShape.createGeometryMask();
         this.spinContainer.setMask(mask);
-        this.spinCenter = new Phaser.GameObjects.Sprite(this, width/2, 350, 'spinCenter').setScale(0.5);
-        this.startButton = new Phaser.GameObjects.Sprite (this, width/2, height/1.15, 'freeSpinStartButton').setScale(0.7).setInteractive()
-        this.bonusContainer.add([ this.SceneBg, this.Stair, this.spinWheelBg, this.spinCircle, this.spinCenter, this.startButton,]);
-        this.spinContainer = this.add.container(width / 2, height / 2.2, [this.spinCircle]);
+       
+        // Create spinCenter with the highest depth
+        this.spinCenter = new Phaser.GameObjects.Sprite(this, width/2, height/2.2, 'spinCenter').setScale(0.5).setDepth(2);
+        
+        this.startButton = new Phaser.GameObjects.Sprite(this, width/2, height/1.15, 'freeSpinStartButton').setScale(0.7).setInteractive();
+      
+        // Add sprites to the bonusContainer in the correct order
+        this.bonusContainer.add([
+            this.SceneBg,
+            this.Stair,
+            this.spinWheelBg,
+            this.spinContainer,
+            this.spinCenter,
+            this.startButton
+        ]);
      
        
         let segments = initData.gameData.BonusData.length;
         let anglePerSegment = 360 / segments;
-        console.log("anglePerSegment", anglePerSegment);
         
         for(let i=0; i< segments; i++){
             let startAngle = Phaser.Math.DegToRad(i * anglePerSegment);
@@ -71,10 +79,6 @@ export default class BonusScene extends Scene{
                     this.startButton.setTexture("freeSpinStartButtonPressed")
                     this.spinWheel(ResultData.gameData.BonusStopIndex);
                  }
-                 //else{
-                    // this.spinWheel(1);
-                 // }
-                 // Pass the index you want the wheel to stop at
             }
         })
       }
@@ -94,7 +98,6 @@ export default class BonusScene extends Scene{
     
         // Calculate random spins before landing on target
         let randomSpins = Phaser.Math.Between(2, 5);
-        console.log(randomSpins, "randomSpins");
         
         let totalRotation = randomSpins * 360 + targetAngle;  // Total rotation including full spins
         console.log(totalRotation, "totalRotation", targetAngle) ;
