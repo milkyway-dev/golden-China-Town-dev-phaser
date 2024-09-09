@@ -125,7 +125,7 @@ export default class MainScene extends Scene {
     recievedMessage(msgType: string, msgParams: any) {
         if (msgType === 'ResultData') {
             this.time.delayedCall(1000, () => {    
-                if (ResultData.gameData.BonusStopIndex > -1) {
+                if (ResultData.gameData.isBonus) {
                     setTimeout(() => {
                         Globals.SceneHandler?.addScene('BonusScene', BonusScene, true)
                     }, 2000);
